@@ -312,6 +312,9 @@ public class HelloController {
         redo.setDisable(rehacer.isEmpty());
     }
 
+    //crear para un boton para cuando este encima que salga un pequeño texto flotante
+
+
 
 
 

@@ -17,7 +17,7 @@ public class HelloApplication extends Application {
 
 
 
-        stage.setTitle("Hello!");
+        stage.setTitle("Editor de Texto");
         stage.setScene(scene);
         stage.show();
     }
