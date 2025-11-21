@@ -362,7 +362,7 @@ public class HelloController {
 
     // Método auxiliar para escribir el fichero
     private void saveTextToFile(File file, String content) {
-        try (java.io.BufferedWriter writer = new java.io.BufferedWriter(new java.io.FileWriter(file))) {
+        try (BufferedWriter writer = new BufferedWriter(new java.io.FileWriter(file))) {
             writer.write(content);
             System.out.println("Archivo guardado correctamente en: " + file.getAbsolutePath());
         } catch (Exception ex) {
