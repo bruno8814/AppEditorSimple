@@ -441,12 +441,12 @@ public class HelloController {
 
     @FXML
     private void onNuevoAction(ActionEvent event) {
-        //Si ya está vacío, no molestamos al usuario
+        //Si ya está vacío, no se hace nada
         if (areaTexto.getText().isEmpty()) {
             return;
         }
 
-        // 2. Crear la alerta de seguridad
+        //Crear alerta de seguridad
         Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
         alerta.setTitle("Nuevo Documento");
         alerta.setHeaderText("¿Borrar todo el contenido?");
@@ -455,9 +455,10 @@ public class HelloController {
         // Mostrar y esperar respuesta
         Optional<ButtonType> resultado = alerta.showAndWait();
 
-        // 4. Si dice que OK, borramos. Si dice Cancelar, no hacemos nada.
+        // OK borramos
+        // Cancelar no hacemos nada.
         if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
-            areaTexto.setText(""); // <--- Aquí está la magia: borrar todo
+            areaTexto.setText("");
 
 
         }
