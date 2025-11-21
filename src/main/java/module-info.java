@@ -10,6 +10,7 @@ module com.example.appeditorsimple {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires java.desktop;
 
     opens com.example.appeditorsimple to javafx.fxml;
     exports com.example.appeditorsimple;

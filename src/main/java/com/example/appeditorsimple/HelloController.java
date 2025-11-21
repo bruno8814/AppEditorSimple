@@ -3,9 +3,17 @@ package com.example.appeditorsimple;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 
+import javax.swing.*;
+import java.io.*;
+import java.nio.file.Files;
+import java.util.Optional;
 import java.util.Stack;
 
 public class HelloController {
@@ -35,6 +43,8 @@ public class HelloController {
 
     @FXML
     private ColorPicker colorpicker;
+    @FXML
+    private Button btnExportar;
 
 
     private Stack<String> deshacer = new Stack<>();
@@ -45,6 +55,7 @@ public class HelloController {
     private boolean estaActivoNegrita = false;
     private boolean estaActivoItalica = false;
     int ultimaPosicionBusqueda = 0;
+    private FileChooser fileChooser;
 
 
 
@@ -71,6 +82,8 @@ public class HelloController {
 
             contadorLabel(newValue);
             actualizarEstadoUndoRedo();
+
+
 
 
         });
@@ -312,12 +325,141 @@ public class HelloController {
         redo.setDisable(rehacer.isEmpty());
     }
 
-    //crear para un boton para cuando este encima que salga un pequeño texto flotante
+
+
+    // A partir de aqui es donde modifico el codigo
+
+    @FXML
+    private void onExportAction(ActionEvent event) {
+        // Inicializar el FileChooser si no existe
+        if (this.fileChooser == null) {
+            this.fileChooser = new FileChooser();
+        }
+
+
+        Node source = (Node) event.getSource();
+        Window stage = source.getScene().getWindow();
+
+        // Configurar el diálogo
+        fileChooser.setTitle("Guardar documento");
+        fileChooser.setInitialFileName("documento.txt");
+        fileChooser.getExtensionFilters().setAll(
+                new FileChooser.ExtensionFilter("Archivos de Texto", "*.txt")
+        );
+
+        // ventana de guardar
+        File file = fileChooser.showSaveDialog(stage);
+
+
+        if (file != null) {
+            // Guardar directorio para la próxima vez
+            fileChooser.setInitialDirectory(file.getParentFile());
+
+            // Escribir el contenido del área de texto en el fichero
+            saveTextToFile(file, areaTexto.getText());
+        }
+    }
+
+    // Método auxiliar para escribir el fichero
+    private void saveTextToFile(File file, String content) {
+        try (java.io.BufferedWriter writer = new java.io.BufferedWriter(new java.io.FileWriter(file))) {
+            writer.write(content);
+            System.out.println("Archivo guardado correctamente en: " + file.getAbsolutePath());
+        } catch (Exception ex) {
+            // Mostrar alerta si falla la escritura
+            javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No se pudo guardar el archivo");
+            alert.setContentText(ex.getMessage());
+            alert.showAndWait();
+        }
+    }
+
+
+    @FXML
+    private void onImportAction(ActionEvent event) {
+        //Inicializar si no existe
+        if (this.fileChooser == null) {
+            this.fileChooser = new FileChooser();
+        }
+
+
+        Node source = (Node) event.getSource();
+        Window stage = source.getScene().getWindow();
+
+
+        fileChooser.setTitle("Abrir documento");
+        fileChooser.getExtensionFilters().setAll(
+                new FileChooser.ExtensionFilter("Archivos de Texto", "*.txt"),
+                new FileChooser.ExtensionFilter("Todos los archivos", "*.*")
+        );
+
+
+        File file = fileChooser.showOpenDialog(stage);
+
+
+        if (file != null) {
+
+            fileChooser.setInitialDirectory(file.getParentFile());
+
+
+            leerFicheroYMostrar(file);
+        }
+    }
+
+    // Metodo auxiliar
+    private void leerFicheroYMostrar(File file) {
+        StringBuilder contenido = new StringBuilder();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String linea;
+
+            while ((linea = br.readLine()) != null) {
+                contenido.append(linea).append("\n");
+            }
+
+            // Ponemos el texto en el editor
+            areaTexto.setText(contenido.toString());
+
+            System.out.println("Archivo importado con éxito: " + file.getName());
+
+        } catch (IOException ex) {
+            // Mostramos una alerta si ocurre algun error
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error de Lectura");
+            alert.setHeaderText("No se pudo abrir el archivo");
+            alert.setContentText("Detalles: " + ex.getMessage());
+            alert.showAndWait();
+        }
+
+
+    }
 
 
 
 
 
+    @FXML
+    private void onNuevoAction(ActionEvent event) {
+        //Si ya está vacío, no molestamos al usuario
+        if (areaTexto.getText().isEmpty()) {
+            return;
+        }
+
+        // 2. Crear la alerta de seguridad
+        Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+        alerta.setTitle("Nuevo Documento");
+        alerta.setHeaderText("¿Borrar todo el contenido?");
+        alerta.setContentText("Esta acción no se puede deshacer.");
+
+        // Mostrar y esperar respuesta
+        Optional<ButtonType> resultado = alerta.showAndWait();
+
+        // 4. Si dice que OK, borramos. Si dice Cancelar, no hacemos nada.
+        if (resultado.isPresent() && resultado.get() == ButtonType.OK) {
+            areaTexto.setText(""); // <--- Aquí está la magia: borrar todo
 
 
+        }
+    }
 }
