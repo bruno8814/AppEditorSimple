@@ -5,15 +5,19 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
-import javax.swing.*;
+
 import java.io.*;
+import java.net.URL;
 import java.nio.file.Files;
 import java.util.Optional;
+import java.util.ResourceBundle;
 import java.util.Stack;
 
 public class HelloController {
@@ -36,15 +40,14 @@ public class HelloController {
     private Button redo;
 
     @FXML
-    private Button bold;
-
-    @FXML
-    private Button italic;
-
-    @FXML
     private ColorPicker colorpicker;
     @FXML
     private Button btnExportar;
+
+    @FXML
+    private Pane pane;
+
+    private ProgressLabel miProgressLabel;
 
 
     private Stack<String> deshacer = new Stack<>();
@@ -56,15 +59,19 @@ public class HelloController {
     private boolean estaActivoItalica = false;
     int ultimaPosicionBusqueda = 0;
     private FileChooser fileChooser;
+    private Stage stage;
 
 
 
     @FXML
-    public void initialize() {
+    public void initialize(URL location, ResourceBundle resources) {
 
         campoBusqueda.setPromptText("Buscar...");
         campoBusqueda2.setPromptText("Reemplazar...");
         areaTexto.setPromptText(" Escribe tu texto aquí...");
+
+        miProgressLabel = new ProgressLabel();
+        miProgressLabel.setPrefWidth(300);
 
         areaTexto.textProperty().addListener((observable, oldValue, newValue) -> {
 
@@ -331,7 +338,14 @@ public class HelloController {
 
     @FXML
     private void onExportAction(ActionEvent event) {
+
+        if (miProgressLabel == null) {
+            System.out.println("⚠️ Recuperando ProgressLabel perdido...");
+            miProgressLabel = new ProgressLabel();
+            miProgressLabel.setPrefWidth(300);
+        }
         // Inicializar el FileChooser si no existe
+
         if (this.fileChooser == null) {
             this.fileChooser = new FileChooser();
         }
@@ -354,10 +368,18 @@ public class HelloController {
         if (file != null) {
             // Guardar directorio para la próxima vez
             fileChooser.setInitialDirectory(file.getParentFile());
+            miProgressLabel.setEstado(AppState.WORKING);
+            miProgressLabel.actualizarProgreso(-1, "Procesando...");
+            mostrarVentanaProgreso("Exportando...");
 
             // Escribir el contenido del área de texto en el fichero
             saveTextToFile(file, areaTexto.getText());
+            miProgressLabel.setEstado(AppState.DONE);
+            miProgressLabel.actualizarProgreso(1, "Guardado con exito!");
+
         }
+
+
     }
 
     // Método auxiliar para escribir el fichero
@@ -378,6 +400,12 @@ public class HelloController {
 
     @FXML
     private void onImportAction(ActionEvent event) {
+
+        if (miProgressLabel == null) {
+            System.out.println("⚠️ Recuperando ProgressLabel perdido...");
+            miProgressLabel = new ProgressLabel();
+            miProgressLabel.setPrefWidth(300);
+        }
         //Inicializar si no existe
         if (this.fileChooser == null) {
             this.fileChooser = new FileChooser();
@@ -402,8 +430,16 @@ public class HelloController {
 
             fileChooser.setInitialDirectory(file.getParentFile());
 
+            fileChooser.setInitialDirectory(file.getParentFile());
+            miProgressLabel.setEstado(AppState.WORKING);
+            miProgressLabel.actualizarProgreso(-1, "Procesando...");
+            mostrarVentanaProgreso("Importando...");
+
 
             leerFicheroYMostrar(file);
+
+            miProgressLabel.setEstado(AppState.DONE);
+            miProgressLabel.actualizarProgreso(1, "Cargado con exito!");
         }
     }
 
@@ -463,4 +499,36 @@ public class HelloController {
 
         }
     }
+
+
+    private void mostrarVentanaProgreso(String titulo){
+
+        if (stage == null) {
+            stage = new Stage();
+
+
+            stage.setTitle(titulo);
+            stage.setResizable(false);
+
+            stage.initModality(Modality.APPLICATION_MODAL);
+            javafx.scene.layout.StackPane root = new javafx.scene.layout.StackPane(miProgressLabel);
+            root.setStyle("-fx-padding: 10;");
+
+            stage.setScene(new javafx.scene.Scene(root, 300, 70));
+        }else{
+
+            stage.setTitle(titulo);
+
+        }
+
+
+        stage.show();
+        stage.toFront();
+
+
+    }
+
+
+
+
 }
