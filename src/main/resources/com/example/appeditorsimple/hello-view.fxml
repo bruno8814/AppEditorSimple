@@ -3,86 +3,110 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
 
-<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="749.0" prefWidth="924.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.appeditorsimple.HelloController">
-    <children>
-        <TextArea fx:id="areaTexto" layoutX="11.0" layoutY="146.0" prefHeight="242.0" prefWidth="902.0" />
-        <Label fx:id="contador" alignment="CENTER" layoutX="7.0" layoutY="528.0" prefHeight="207.0" prefWidth="911.0" text="Caracteres: 0  |   Palabras: 0   |   Espacios: 0" textAlignment="CENTER" />
-        <Button fx:id="undo" layoutX="20.0" layoutY="14.0" mnemonicParsing="false" onAction="#onUndoAction" prefHeight="25.0" prefWidth="41.0" text="Undo">
-            <font>
-                <Font size="10.0" />
-            </font>
-            <tooltip>
-                <Tooltip text="Deshacer la última acción" />
-            </tooltip>
+<VBox fx:id="mainContainer" spacing="10" stylesheets="@styles.css" 
+      xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" 
+      fx:controller="com.example.appeditorsimple.HelloController">
+    <padding>
+        <Insets top="15" right="15" bottom="15" left="15"/>
+    </padding>
+    
+    <!-- ========== TOOLBAR PRINCIPAL ========== -->
+    <HBox spacing="8" alignment="CENTER_LEFT" styleClass="toolbar">
+        <!-- Grupo: Archivo -->
+        <Button fx:id="btnNuevoDocumento" text="📄 Nuevo" onAction="#onNuevoAction" styleClass="button"/>
+        <Button fx:id="btnImportar" text="📂 Abrir" onAction="#onImportAction" styleClass="button"/>
+        <Button fx:id="btnExportar" text="💾 Guardar" onAction="#onExportAction" styleClass="button"/>
+        
+        <Separator orientation="VERTICAL"/>
+        
+        <!-- Grupo: Undo/Redo -->
+        <Button fx:id="undo" text="↩ Deshacer" onAction="#onUndoAction" styleClass="button"/>
+        <Button fx:id="redo" text="↪ Rehacer" onAction="#onRedoAction" styleClass="button"/>
+        
+        <Separator orientation="VERTICAL"/>
+        
+        <!-- Grupo: Formato -->
+        <Button fx:id="bold" text="𝐁" onAction="#onBoldAction" styleClass="button" prefWidth="40">
+            <tooltip><Tooltip text="Negrita"/></tooltip>
         </Button>
-        <Button fx:id="redo" layoutX="68.0" layoutY="14.0" mnemonicParsing="false" onAction="#onRedoAction" prefHeight="25.0" prefWidth="41.0" text="Redo">
-            <font>
-                <Font size="10.0" />
-            </font>
-            <tooltip>
-                <Tooltip text="Rehacer la última acción" />
-            </tooltip>
+        <Button fx:id="italic" text="𝐼" onAction="#onItalicAction" styleClass="button" prefWidth="40">
+            <tooltip><Tooltip text="Cursiva"/></tooltip>
         </Button>
-        <Button fx:id="bold" layoutX="134.0" layoutY="14.0" mnemonicParsing="false" onAction="#onBoldAction" prefHeight="25.0" prefWidth="52.0" text="Bold">
-            <tooltip>
-                <Tooltip text="Poner el texto en negrita" />
-            </tooltip>
+        <ColorPicker fx:id="colorpicker" onAction="#onColorPickerAction" prefWidth="50"/>
+        
+        <Separator orientation="VERTICAL"/>
+        
+        <!-- Grupo: Transformar -->
+        <Button fx:id="mayus" text="AA" onAction="#onMayusAction" styleClass="button" prefWidth="45">
+            <tooltip><Tooltip text="Mayúsculas"/></tooltip>
         </Button>
-        <Button fx:id="italic" layoutX="192.0" layoutY="14.0" mnemonicParsing="false" onAction="#onItalicAction" prefHeight="25.0" prefWidth="52.0" text="Italic">
-            <tooltip>
-                <Tooltip text="Poner el texto en cursiva" />
-            </tooltip>
+        <Button fx:id="minus" text="aa" onAction="#onMinusAction" styleClass="button" prefWidth="45">
+            <tooltip><Tooltip text="Minúsculas"/></tooltip>
         </Button>
-        <Button fx:id="mayus" layoutX="325.0" layoutY="14.0" mnemonicParsing="false" onAction="#onMayusAction" prefHeight="25.0" prefWidth="52.0" text="Mayus">
-            <tooltip>
-                <Tooltip text="Convertir el texto seleccionado a mayúsculas" />
-            </tooltip>
+        <Button fx:id="cap" text="Aa" onAction="#onCapAction" styleClass="button" prefWidth="45">
+            <tooltip><Tooltip text="Capitalizar"/></tooltip>
         </Button>
-        <Button fx:id="minus" layoutX="385.0" layoutY="14.0" mnemonicParsing="false" onAction="#onMinusAction" prefHeight="25.0" prefWidth="52.0" text="minus">
-            <tooltip>
-                <Tooltip text="Convertir el texto seleccionado a minúsculas" />
-            </tooltip>
+        <Button fx:id="invert" text="⇅" onAction="#onInvertAction" styleClass="button" prefWidth="40">
+            <tooltip><Tooltip text="Invertir"/></tooltip>
         </Button>
-        <Button fx:id="cap" layoutX="446.0" layoutY="14.0" mnemonicParsing="false" onAction="#onCapAction" prefHeight="25.0" prefWidth="52.0" text="Cap">
-            <tooltip>
-                <Tooltip text="Poner en mayúscula la primera letra de cada palabra" />
-            </tooltip>
+        <Button fx:id="espacios" text="⎵" onAction="#onClearSpaceAction" styleClass="button" prefWidth="40">
+            <tooltip><Tooltip text="Limpiar espacios"/></tooltip>
         </Button>
-        <Button fx:id="invert" layoutX="506.0" layoutY="14.0" mnemonicParsing="false" onAction="#onInvertAction" prefHeight="25.0" prefWidth="52.0" text="Invert">
-            <tooltip>
-                <Tooltip text="Invertir mayúsculas y minúsculas del texto" />
-            </tooltip>
-        </Button>
-        <Button fx:id="espacios" layoutX="565.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClearSpaceAction" prefHeight="25.0" prefWidth="112.0" text="Limpiar espacios">
-            <tooltip>
-                <Tooltip text="Eliminar espacios y saltos de línea innecesarios" />
-            </tooltip>
-        </Button>
-        <TextField fx:id="campoBusqueda" layoutX="23.0" layoutY="67.0" prefHeight="25.0" prefWidth="229.0" />
-        <TextField fx:id="campoBusqueda2" layoutX="262.0" layoutY="67.0" prefHeight="25.0" prefWidth="229.0" />
-        <Button fx:id="buscar" layoutX="506.0" layoutY="67.0" mnemonicParsing="false" onAction="#onBuscarAction" text="Buscar">
-            <tooltip>
-                <Tooltip text="Buscar el texto del primer campo" />
-            </tooltip>
-        </Button>
-        <Button fx:id="siguiente" layoutX="569.0" layoutY="67.0" mnemonicParsing="false" onAction="#onSiguienteAction" text="Siguiente">
-            <tooltip>
-                <Tooltip text="Buscar la siguiente coincidencia" />
-            </tooltip>
-        </Button>
-        <Button fx:id="reemplazar" layoutX="646.0" layoutY="67.0" mnemonicParsing="false" onAction="#onReemplazarAction" text="Reemplazar">
-            <tooltip>
-                <Tooltip text="Reemplazar el texto encontrado por el del segundo campo" />
-            </tooltip>
-        </Button>
-        <ColorPicker fx:id="colorpicker" layoutX="252.0" layoutY="14.0" onAction="#onColorPickerAction" prefHeight="25.0" prefWidth="41.0">
-            <tooltip>
-                <Tooltip text="Seleccionar un color para el texto" />
-            </tooltip>
-        </ColorPicker>
-      <Button fx:id="btnExportar" layoutX="742.0" layoutY="14.0" mnemonicParsing="false" onAction="#onExportAction" text="Exportar" />
-      <Button fx:id="btnImportar" layoutX="811.0" layoutY="14.0" mnemonicParsing="false" onAction="#onImportAction" text="Importar" />
-      <Button fx:id="btnNuevoDocumento" layoutX="756.0" layoutY="67.0" mnemonicParsing="false" onAction="#onNuevoAction" text="Nuevo Documento" />
-    </children>
-</Pane>
+    </HBox>
+    
+    <!-- ========== BARRA DE BÚSQUEDA ========== -->
+    <HBox spacing="8" alignment="CENTER_LEFT">
+        <TextField fx:id="campoBusqueda" promptText="🔍 Buscar..." prefWidth="250" styleClass="text-field"/>
+        <TextField fx:id="campoBusqueda2" promptText="Reemplazar con..." prefWidth="250" styleClass="text-field"/>
+        <Button fx:id="buscar" text="Buscar" onAction="#onBuscarAction" styleClass="button"/>
+        <Button fx:id="siguiente" text="Siguiente" onAction="#onSiguienteAction" styleClass="button"/>
+        <Button fx:id="reemplazar" text="Reemplazar" onAction="#onReemplazarAction" styleClass="btn-secondary"/>
+    </HBox>
+    
+    <!-- ========== ÁREA DE TEXTO PRINCIPAL ========== -->
+    <TextArea fx:id="areaTexto" VBox.vgrow="ALWAYS" prefHeight="300" styleClass="text-area"
+              promptText="Escribe aquí tu texto o usa los comandos de voz..."/>
+    
+    <!-- ========== CONTADOR ========== -->
+    <Label fx:id="contador" text="Caracteres: 0  |  Palabras: 0  |  Espacios: 0" 
+           alignment="CENTER" styleClass="label" style="-fx-text-fill: #888;"/>
+    
+    <!-- ========== PANEL NUI - CONTROL POR VOZ ========== -->
+    <VBox spacing="12" styleClass="nui-panel">
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="🎤 Control por Voz (NUI)" styleClass="label-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="lblModeloStatus" text="⏳ Modelo no cargado" style="-fx-text-fill: #f59e0b;"/>
+        </HBox>
+        
+        <HBox spacing="12" alignment="CENTER_LEFT">
+            <!-- Botón de grabación grande -->
+            <Button fx:id="btnGrabar" text="🎤 Iniciar Grabación" onAction="#onToggleRecordingAction" 
+                    styleClass="btn-record" prefWidth="180" prefHeight="45">
+                <tooltip><Tooltip text="Mantén pulsado o haz clic para grabar comandos de voz"/></tooltip>
+            </Button>
+            
+            <!-- Estado de reconocimiento -->
+            <VBox spacing="3" HBox.hgrow="ALWAYS">
+                <Label fx:id="lblEstadoNui" text="🎤 Listo para grabar" styleClass="label-status"/>
+                <Label fx:id="lblTextoReconocido" text="" style="-fx-text-fill: #6366f1; -fx-font-size: 12px;"/>
+            </VBox>
+            
+            <!-- Botón cargar modelo -->
+            <Button fx:id="btnCargarModelo" text="📥 Cargar Modelo" onAction="#onCargarModeloAction" 
+                    styleClass="btn-secondary" prefWidth="140"/>
+        </HBox>
+        
+        <!-- Barra de simulación (modo fallback) -->
+        <HBox spacing="8" alignment="CENTER_LEFT">
+            <TextField fx:id="campoVozSimulada" promptText="Modo texto: escribe comando y pulsa Enter..." 
+                       prefWidth="400" styleClass="text-field" onAction="#onEjecutarVozAction"/>
+            <Button text="▶ Ejecutar" onAction="#onEjecutarVozAction" styleClass="btn-primary"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label text="Comandos: nuevo, guardar, negrita, cursiva, rojo, azul, dictar [texto]" 
+                   style="-fx-text-fill: #666; -fx-font-size: 10px;"/>
+        </HBox>
+    </VBox>
+</VBox>

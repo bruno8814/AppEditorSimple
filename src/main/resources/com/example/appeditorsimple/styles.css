@@ -1,0 +1,241 @@
+/* ============================================
+   Modern Dark Theme - Editor de Texto NUI
+   ============================================ */
+
+/* Fondo principal */
+.root {
+    -fx-background-color: linear-gradient(to bottom, #1a1a2e, #16213e);
+    -fx-font-family: 'Segoe UI', 'Arial', sans-serif;
+}
+
+/* Panel principal */
+.pane {
+    -fx-background-color: linear-gradient(to bottom, #1a1a2e, #16213e);
+}
+
+/* ============================================
+   Área de texto principal
+   ============================================ */
+.text-area {
+    -fx-background-color: #0f0f23;
+    -fx-text-fill: #e4e4e7;
+    -fx-font-size: 14px;
+    -fx-font-family: 'Consolas', 'Courier New', monospace;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: #3a3a5c;
+    -fx-border-width: 2;
+    -fx-padding: 10;
+}
+
+.text-area .content {
+    -fx-background-color: #0f0f23;
+    -fx-background-radius: 10;
+}
+
+.text-area:focused {
+    -fx-border-color: #6366f1;
+    -fx-effect: dropshadow(gaussian, rgba(99, 102, 241, 0.4), 10, 0, 0, 0);
+}
+
+/* ============================================
+   Botones estándar
+   ============================================ */
+.button {
+    -fx-background-color: linear-gradient(to bottom, #3b3b5c, #2a2a4a);
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 8 16 8 16;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: #5a5a7c;
+    -fx-border-width: 1;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0, 0, 2);
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(to bottom, #4a4a6c, #3b3b5c);
+    -fx-border-color: #7a7a9c;
+    -fx-effect: dropshadow(gaussian, rgba(99, 102, 241, 0.4), 8, 0, 0, 2);
+}
+
+.button:pressed {
+    -fx-background-color: linear-gradient(to bottom, #2a2a4a, #1a1a3a);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 3, 0, 0, 1);
+}
+
+/* ============================================
+   Botones de acción principal (verde)
+   ============================================ */
+.btn-primary {
+    -fx-background-color: linear-gradient(to bottom, #22c55e, #16a34a);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-border-color: #15803d;
+}
+
+.btn-primary:hover {
+    -fx-background-color: linear-gradient(to bottom, #4ade80, #22c55e);
+    -fx-effect: dropshadow(gaussian, rgba(34, 197, 94, 0.5), 10, 0, 0, 2);
+}
+
+/* ============================================
+   Botones de grabación (rojo)
+   ============================================ */
+.btn-record {
+    -fx-background-color: linear-gradient(to bottom, #ef4444, #dc2626);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-border-color: #b91c1c;
+    -fx-font-size: 14px;
+}
+
+.btn-record:hover {
+    -fx-background-color: linear-gradient(to bottom, #f87171, #ef4444);
+    -fx-effect: dropshadow(gaussian, rgba(239, 68, 68, 0.6), 12, 0, 0, 2);
+}
+
+.btn-record-active {
+    -fx-background-color: linear-gradient(to bottom, #dc2626, #991b1b);
+    -fx-border-color: #fca5a5;
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(gaussian, rgba(239, 68, 68, 0.8), 15, 0, 0, 0);
+}
+
+/* ============================================
+   Botones secundarios (azul)
+   ============================================ */
+.btn-secondary {
+    -fx-background-color: linear-gradient(to bottom, #3b82f6, #2563eb);
+    -fx-text-fill: white;
+    -fx-border-color: #1d4ed8;
+}
+
+.btn-secondary:hover {
+    -fx-background-color: linear-gradient(to bottom, #60a5fa, #3b82f6);
+    -fx-effect: dropshadow(gaussian, rgba(59, 130, 246, 0.5), 10, 0, 0, 2);
+}
+
+/* ============================================
+   Campos de texto
+   ============================================ */
+.text-field {
+    -fx-background-color: #1e1e3f;
+    -fx-text-fill: #e4e4e7;
+    -fx-font-size: 13px;
+    -fx-padding: 10;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: #3a3a5c;
+    -fx-border-width: 2;
+    -fx-prompt-text-fill: #6b6b8d;
+}
+
+.text-field:focused {
+    -fx-border-color: #6366f1;
+    -fx-effect: dropshadow(gaussian, rgba(99, 102, 241, 0.3), 8, 0, 0, 0);
+}
+
+/* ============================================
+   Labels
+   ============================================ */
+.label {
+    -fx-text-fill: #a1a1aa;
+    -fx-font-size: 12px;
+}
+
+.label-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.label-status {
+    -fx-text-fill: #22c55e;
+    -fx-font-size: 13px;
+    -fx-font-style: italic;
+}
+
+.label-status-error {
+    -fx-text-fill: #ef4444;
+}
+
+.label-status-recording {
+    -fx-text-fill: #ef4444;
+    -fx-font-weight: bold;
+}
+
+/* ============================================
+   Panel NUI
+   ============================================ */
+.nui-panel {
+    -fx-background-color: rgba(30, 30, 60, 0.8);
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-color: #4a4a6c;
+    -fx-border-width: 2;
+    -fx-padding: 15;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 10, 0, 0, 4);
+}
+
+/* ============================================
+   Toolbar
+   ============================================ */
+.toolbar {
+    -fx-background-color: rgba(26, 26, 46, 0.95);
+    -fx-padding: 10;
+    -fx-spacing: 8;
+}
+
+/* ============================================
+   ColorPicker
+   ============================================ */
+.color-picker {
+    -fx-background-color: #2a2a4a;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: #4a4a6c;
+}
+
+.color-picker:hover {
+    -fx-border-color: #6366f1;
+}
+
+/* ============================================
+   Separador
+   ============================================ */
+.separator {
+    -fx-background-color: #3a3a5c;
+}
+
+/* ============================================
+   ScrollBar personalizada
+   ============================================ */
+.scroll-bar {
+    -fx-background-color: #1a1a2e;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #4a4a6c;
+    -fx-background-radius: 5;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-background-color: #6366f1;
+}
+
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+}
+
+/* ============================================
+   Animación de pulso para grabación
+   ============================================ */
+@keyframes pulse {
+    0% { -fx-opacity: 1.0; }
+    50% { -fx-opacity: 0.6; }
+    100% { -fx-opacity: 1.0; }
+}

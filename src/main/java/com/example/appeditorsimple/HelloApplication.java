@@ -12,12 +12,9 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 924, 749);
+        Scene scene = new Scene(fxmlLoader.load(), 1000, 700);
 
-
-
-
-        stage.setTitle("Editor de Texto");
+        stage.setTitle("Editor de Texto - NUI Voice Control");
         stage.setScene(scene);
         stage.show();
     }
