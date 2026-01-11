@@ -164,17 +164,17 @@ public class HelloController implements NuiListener, VoskSpeechAdapter.VoskStatu
     @FXML
     private void onToggleRecordingAction(ActionEvent event) {
         if (!voskAdapter.isModelLoaded()) {
-            actualizarEstadoNui("⚠️ Primero carga el modelo de voz", false);
+            actualizarEstadoNui("Primero carga el modelo de voz", false);
             return;
         }
 
         if (voskAdapter.isRecording()) {
             voskAdapter.stopRecording();
-            btnGrabar.setText("🎤 Iniciar Grabación");
+            btnGrabar.setText("Iniciar Grabacion");
             btnGrabar.getStyleClass().remove("btn-record-active");
         } else {
             voskAdapter.startRecording();
-            btnGrabar.setText("⏹ Detener Grabación");
+            btnGrabar.setText("Detener Grabacion");
             btnGrabar.getStyleClass().add("btn-record-active");
         }
     }
@@ -216,7 +216,7 @@ public class HelloController implements NuiListener, VoskSpeechAdapter.VoskStatu
                 }
             }
             if (lblModeloStatus != null && status.contains("Modelo cargado")) {
-                lblModeloStatus.setText("✅ Modelo cargado");
+                lblModeloStatus.setText("Modelo cargado");
                 lblModeloStatus.setStyle("-fx-text-fill: #22c55e;");
             }
         });
@@ -226,7 +226,7 @@ public class HelloController implements NuiListener, VoskSpeechAdapter.VoskStatu
     public void onTextRecognized(String text, boolean isFinal) {
         Platform.runLater(() -> {
             if (lblTextoReconocido != null) {
-                String prefix = isFinal ? "✓ " : "... ";
+                String prefix = isFinal ? "" : "... ";
                 lblTextoReconocido.setText(prefix + text);
             }
         });
@@ -235,7 +235,7 @@ public class HelloController implements NuiListener, VoskSpeechAdapter.VoskStatu
     @Override
     public void onError(String error) {
         Platform.runLater(() -> {
-            actualizarEstadoNui("❌ " + error, false);
+            actualizarEstadoNui("Error: " + error, false);
         });
     }
 
