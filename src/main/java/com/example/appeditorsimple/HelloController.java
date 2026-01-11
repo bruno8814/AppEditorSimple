@@ -466,7 +466,7 @@ public class HelloController implements NuiListener, VoskSpeechAdapter.VoskStatu
     private void onExportAction(ActionEvent event) {
 
         if (miProgressLabel == null) {
-            System.out.println("⚠️ Recuperando ProgressLabel perdido...");
+            System.out.println("Recuperando ProgressLabel perdido...");
             miProgressLabel = new ProgressLabel();
             miProgressLabel.setPrefWidth(300);
         }
@@ -524,7 +524,7 @@ public class HelloController implements NuiListener, VoskSpeechAdapter.VoskStatu
     private void onImportAction(ActionEvent event) {
 
         if (miProgressLabel == null) {
-            System.out.println("⚠️ Recuperando ProgressLabel perdido...");
+            System.out.println("Recuperando ProgressLabel perdido...");
             miProgressLabel = new ProgressLabel();
             miProgressLabel.setPrefWidth(300);
         }
@@ -648,13 +648,13 @@ public class HelloController implements NuiListener, VoskSpeechAdapter.VoskStatu
 
         String input = campoVozSimulada.getText();
         if (input == null || input.trim().isEmpty()) {
-            actualizarEstadoNui("⚠️ Escribe un comando primero", false);
+            actualizarEstadoNui("Escribe un comando primero", false);
             return;
         }
 
         boolean reconocido = speechAdapter.processInput(input);
         if (!reconocido) {
-            actualizarEstadoNui("❌ Comando no reconocido: " + input, false);
+            actualizarEstadoNui("Comando no reconocido: " + input, false);
         }
 
         // Limpiar campo después de procesar
@@ -693,37 +693,37 @@ public class HelloController implements NuiListener, VoskSpeechAdapter.VoskStatu
             switch (cmd) {
                 case NUEVO_DOCUMENTO:
                     onNuevoAction(null);
-                    actualizarEstadoNui("✓ Nuevo documento", true);
+                    actualizarEstadoNui("Nuevo documento", true);
                     break;
 
                 case ABRIR_DOCUMENTO:
                     onImportAction(null);
-                    actualizarEstadoNui("✓ Abrir documento", true);
+                    actualizarEstadoNui("Abrir documento", true);
                     break;
 
                 case GUARDAR_DOCUMENTO:
                     onExportAction(null);
-                    actualizarEstadoNui("✓ Guardar documento", true);
+                    actualizarEstadoNui("Guardar documento", true);
                     break;
 
                 case APLICAR_NEGRITA:
                     onBoldAction();
-                    actualizarEstadoNui("✓ Negrita " + (estaActivoNegrita ? "activada" : "desactivada"), true);
+                    actualizarEstadoNui("Negrita " + (estaActivoNegrita ? "activada" : "desactivada"), true);
                     break;
 
                 case APLICAR_CURSIVA:
                     onItalicAction();
-                    actualizarEstadoNui("✓ Cursiva " + (estaActivoItalica ? "activada" : "desactivada"), true);
+                    actualizarEstadoNui("Cursiva " + (estaActivoItalica ? "activada" : "desactivada"), true);
                     break;
 
                 case COLOR_ROJO:
                     aplicarColorTexto(Color.RED);
-                    actualizarEstadoNui("✓ Color rojo aplicado", true);
+                    actualizarEstadoNui("Color rojo aplicado", true);
                     break;
 
                 case COLOR_AZUL:
                     aplicarColorTexto(Color.BLUE);
-                    actualizarEstadoNui("✓ Color azul aplicado", true);
+                    actualizarEstadoNui("Color azul aplicado", true);
                     break;
 
                 case DICTAR_TEXTO:
@@ -734,12 +734,12 @@ public class HelloController implements NuiListener, VoskSpeechAdapter.VoskStatu
                             areaTexto.appendText(" ");
                         }
                         areaTexto.appendText(payload);
-                        actualizarEstadoNui("✓ Dictado: \"" + payload + "\"", true);
+                        actualizarEstadoNui("Dictado: \"" + payload + "\"", true);
                     }
                     break;
 
                 default:
-                    actualizarEstadoNui("⚠️ Comando no implementado: " + cmd, false);
+                    actualizarEstadoNui("Comando no implementado: " + cmd, false);
             }
         });
     }
