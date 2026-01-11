@@ -139,11 +139,22 @@
 }
 
 /* ============================================
-   Labels
+   Labels - MEJORADO CONTRASTE WCAG
    ============================================ */
 .label {
-    -fx-text-fill: #a1a1aa;
+    -fx-text-fill: #e4e4e7;
+    /* Mejorado de #a1a1aa para ratio 11:1 */
     -fx-font-size: 12px;
+}
+
+/* ============================================
+   Botón activo (Negrita/Cursiva activados)
+   ============================================ */
+.button-active {
+    -fx-background-color: linear-gradient(to bottom, #7c3aed, #5b21b6);
+    -fx-border-color: #a78bfa;
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(gaussian, rgba(124, 58, 237, 0.6), 8, 0, 0, 2);
 }
 
 .label-title {
@@ -235,7 +246,15 @@
    Animación de pulso para grabación
    ============================================ */
 @keyframes pulse {
-    0% { -fx-opacity: 1.0; }
-    50% { -fx-opacity: 0.6; }
-    100% { -fx-opacity: 1.0; }
+    0% {
+        -fx-opacity: 1.0;
+    }
+
+    50% {
+        -fx-opacity: 0.6;
+    }
+
+    100% {
+        -fx-opacity: 1.0;
+    }
 }

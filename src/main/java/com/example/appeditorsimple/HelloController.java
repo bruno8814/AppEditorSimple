@@ -48,6 +48,12 @@ public class HelloController implements NuiListener, VoskSpeechAdapter.VoskStatu
     private Button redo;
 
     @FXML
+    private Button bold;
+
+    @FXML
+    private Button italic;
+
+    @FXML
     private ColorPicker colorpicker;
 
     @FXML
@@ -140,10 +146,10 @@ public class HelloController implements NuiListener, VoskSpeechAdapter.VoskStatu
             campoVozSimulada.setPromptText("Modo texto: escribe comando y pulsa Enter...");
         }
         if (lblEstadoNui != null) {
-            lblEstadoNui.setText("🎤 Listo para grabar");
+            lblEstadoNui.setText("Listo para grabar");
         }
         if (lblModeloStatus != null) {
-            lblModeloStatus.setText("⏳ Modelo no cargado");
+            lblModeloStatus.setText("Modelo no cargado");
             lblModeloStatus.setStyle("-fx-text-fill: #f59e0b;");
         }
 
@@ -299,30 +305,29 @@ public class HelloController implements NuiListener, VoskSpeechAdapter.VoskStatu
     }
 
     @FXML
-
     private void onBoldAction() {
         estaActivoNegrita = !estaActivoNegrita;
 
         if (estaActivoNegrita) {
             areaTexto.setStyle("-fx-font-weight: bold;");
+            bold.getStyleClass().add("button-active"); // Feedback visual RA4
         } else {
             areaTexto.setStyle("-fx-font-weight: normal;");
+            bold.getStyleClass().remove("button-active");
         }
-
     }
 
     @FXML
-
     public void onItalicAction() {
-
         estaActivoItalica = !estaActivoItalica;
 
         if (estaActivoItalica) {
             areaTexto.setStyle("-fx-font-style: italic;");
+            italic.getStyleClass().add("button-active"); // Feedback visual RA4
         } else {
             areaTexto.setStyle("-fx-font-style: normal;");
+            italic.getStyleClass().remove("button-active");
         }
-
     }
 
     @FXML

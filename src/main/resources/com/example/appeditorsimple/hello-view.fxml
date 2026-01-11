@@ -12,26 +12,26 @@
         <Insets top="15" right="15" bottom="15" left="15"/>
     </padding>
     
-    <!-- ========== TOOLBAR PRINCIPAL ========== -->
+    <!-- TOOLBAR PRINCIPAL -->
     <HBox spacing="8" alignment="CENTER_LEFT" styleClass="toolbar">
         <!-- Grupo: Archivo -->
-        <Button fx:id="btnNuevoDocumento" text="📄 Nuevo" onAction="#onNuevoAction" styleClass="button"/>
-        <Button fx:id="btnImportar" text="📂 Abrir" onAction="#onImportAction" styleClass="button"/>
-        <Button fx:id="btnExportar" text="💾 Guardar" onAction="#onExportAction" styleClass="button"/>
+        <Button fx:id="btnNuevoDocumento" text="Nuevo" onAction="#onNuevoAction" styleClass="button"/>
+        <Button fx:id="btnImportar" text="Abrir" onAction="#onImportAction" styleClass="button"/>
+        <Button fx:id="btnExportar" text="Guardar" onAction="#onExportAction" styleClass="button"/>
         
         <Separator orientation="VERTICAL"/>
         
         <!-- Grupo: Undo/Redo -->
-        <Button fx:id="undo" text="↩ Deshacer" onAction="#onUndoAction" styleClass="button"/>
-        <Button fx:id="redo" text="↪ Rehacer" onAction="#onRedoAction" styleClass="button"/>
+        <Button fx:id="undo" text="Deshacer" onAction="#onUndoAction" styleClass="button"/>
+        <Button fx:id="redo" text="Rehacer" onAction="#onRedoAction" styleClass="button"/>
         
         <Separator orientation="VERTICAL"/>
         
         <!-- Grupo: Formato -->
-        <Button fx:id="bold" text="𝐁" onAction="#onBoldAction" styleClass="button" prefWidth="40">
+        <Button fx:id="bold" text="N" onAction="#onBoldAction" styleClass="button" prefWidth="40">
             <tooltip><Tooltip text="Negrita"/></tooltip>
         </Button>
-        <Button fx:id="italic" text="𝐼" onAction="#onItalicAction" styleClass="button" prefWidth="40">
+        <Button fx:id="italic" text="K" onAction="#onItalicAction" styleClass="button" prefWidth="40">
             <tooltip><Tooltip text="Cursiva"/></tooltip>
         </Button>
         <ColorPicker fx:id="colorpicker" onAction="#onColorPickerAction" prefWidth="50"/>
@@ -40,73 +40,71 @@
         
         <!-- Grupo: Transformar -->
         <Button fx:id="mayus" text="AA" onAction="#onMayusAction" styleClass="button" prefWidth="45">
-            <tooltip><Tooltip text="Mayúsculas"/></tooltip>
+            <tooltip><Tooltip text="Mayusculas"/></tooltip>
         </Button>
         <Button fx:id="minus" text="aa" onAction="#onMinusAction" styleClass="button" prefWidth="45">
-            <tooltip><Tooltip text="Minúsculas"/></tooltip>
+            <tooltip><Tooltip text="Minusculas"/></tooltip>
         </Button>
         <Button fx:id="cap" text="Aa" onAction="#onCapAction" styleClass="button" prefWidth="45">
             <tooltip><Tooltip text="Capitalizar"/></tooltip>
         </Button>
-        <Button fx:id="invert" text="⇅" onAction="#onInvertAction" styleClass="button" prefWidth="40">
+        <Button fx:id="invert" text="Inv" onAction="#onInvertAction" styleClass="button" prefWidth="45">
             <tooltip><Tooltip text="Invertir"/></tooltip>
         </Button>
-        <Button fx:id="espacios" text="⎵" onAction="#onClearSpaceAction" styleClass="button" prefWidth="40">
+        <Button fx:id="espacios" text="Esp" onAction="#onClearSpaceAction" styleClass="button" prefWidth="45">
             <tooltip><Tooltip text="Limpiar espacios"/></tooltip>
         </Button>
     </HBox>
     
-    <!-- ========== BARRA DE BÚSQUEDA ========== -->
+    <!-- BARRA DE BUSQUEDA -->
     <HBox spacing="8" alignment="CENTER_LEFT">
-        <TextField fx:id="campoBusqueda" promptText="🔍 Buscar..." prefWidth="250" styleClass="text-field"/>
+        <TextField fx:id="campoBusqueda" promptText="Buscar..." prefWidth="250" styleClass="text-field"/>
         <TextField fx:id="campoBusqueda2" promptText="Reemplazar con..." prefWidth="250" styleClass="text-field"/>
         <Button fx:id="buscar" text="Buscar" onAction="#onBuscarAction" styleClass="button"/>
         <Button fx:id="siguiente" text="Siguiente" onAction="#onSiguienteAction" styleClass="button"/>
         <Button fx:id="reemplazar" text="Reemplazar" onAction="#onReemplazarAction" styleClass="btn-secondary"/>
     </HBox>
     
-    <!-- ========== ÁREA DE TEXTO PRINCIPAL ========== -->
+    <!-- AREA DE TEXTO PRINCIPAL -->
     <TextArea fx:id="areaTexto" VBox.vgrow="ALWAYS" prefHeight="300" styleClass="text-area"
-              promptText="Escribe aquí tu texto o usa los comandos de voz..."/>
+              promptText="Escribe aqui tu texto..."/>
     
-    <!-- ========== CONTADOR ========== -->
+    <!-- CONTADOR -->
     <Label fx:id="contador" text="Caracteres: 0  |  Palabras: 0  |  Espacios: 0" 
            alignment="CENTER" styleClass="label" style="-fx-text-fill: #888;"/>
     
-    <!-- ========== PANEL NUI - CONTROL POR VOZ ========== -->
+    <!-- PANEL NUI - CONTROL POR VOZ -->
     <VBox spacing="12" styleClass="nui-panel">
         <HBox spacing="10" alignment="CENTER_LEFT">
-            <Label text="🎤 Control por Voz (NUI)" styleClass="label-title"/>
+            <Label text="Control por Voz (NUI)" styleClass="label-title"/>
             <Region HBox.hgrow="ALWAYS"/>
-            <Label fx:id="lblModeloStatus" text="⏳ Modelo no cargado" style="-fx-text-fill: #f59e0b;"/>
+            <Label fx:id="lblModeloStatus" text="Modelo no cargado" style="-fx-text-fill: #f59e0b;"/>
         </HBox>
         
         <HBox spacing="12" alignment="CENTER_LEFT">
-            <!-- Botón de grabación grande -->
-            <Button fx:id="btnGrabar" text="🎤 Iniciar Grabación" onAction="#onToggleRecordingAction" 
+            <Button fx:id="btnGrabar" text="Iniciar Grabacion" onAction="#onToggleRecordingAction" 
                     styleClass="btn-record" prefWidth="180" prefHeight="45">
-                <tooltip><Tooltip text="Mantén pulsado o haz clic para grabar comandos de voz"/></tooltip>
+                <tooltip><Tooltip text="Haz clic para grabar comandos de voz"/></tooltip>
             </Button>
             
-            <!-- Estado de reconocimiento -->
             <VBox spacing="3" HBox.hgrow="ALWAYS">
-                <Label fx:id="lblEstadoNui" text="🎤 Listo para grabar" styleClass="label-status"/>
+                <Label fx:id="lblEstadoNui" text="Listo para grabar" styleClass="label-status"/>
                 <Label fx:id="lblTextoReconocido" text="" style="-fx-text-fill: #6366f1; -fx-font-size: 12px;"/>
             </VBox>
             
-            <!-- Botón cargar modelo -->
-            <Button fx:id="btnCargarModelo" text="📥 Cargar Modelo" onAction="#onCargarModeloAction" 
+            <Button fx:id="btnCargarModelo" text="Cargar Modelo" onAction="#onCargarModeloAction" 
                     styleClass="btn-secondary" prefWidth="140"/>
         </HBox>
         
-        <!-- Barra de simulación (modo fallback) -->
+        <!-- Barra de simulacion -->
         <HBox spacing="8" alignment="CENTER_LEFT">
-            <TextField fx:id="campoVozSimulada" promptText="Modo texto: escribe comando y pulsa Enter..." 
+            <TextField fx:id="campoVozSimulada" promptText="Escribe comando y pulsa Enter..." 
                        prefWidth="400" styleClass="text-field" onAction="#onEjecutarVozAction"/>
-            <Button text="▶ Ejecutar" onAction="#onEjecutarVozAction" styleClass="btn-primary"/>
+            <Button text="Ejecutar" onAction="#onEjecutarVozAction" styleClass="btn-primary"/>
             <Region HBox.hgrow="ALWAYS"/>
-            <Label text="Comandos: nuevo, guardar, negrita, cursiva, rojo, azul, dictar [texto]" 
+            <Label text="Comandos: nuevo, guardar, negrita, cursiva, rojo, azul" 
                    style="-fx-text-fill: #666; -fx-font-size: 10px;"/>
         </HBox>
     </VBox>
 </VBox>
+

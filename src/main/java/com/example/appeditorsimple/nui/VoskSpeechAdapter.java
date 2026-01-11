@@ -79,7 +79,7 @@ public class VoskSpeechAdapter {
             model = new Model(modelPath);
             recognizer = new Recognizer(model, SAMPLE_RATE);
             isModelLoaded.set(true);
-            notifyStatus("🎤 Modelo cargado - Listo para grabar", false);
+            notifyStatus("Modelo cargado - Listo para grabar", false);
             return true;
 
         } catch (IOException e) {
@@ -161,7 +161,7 @@ public class VoskSpeechAdapter {
             microphone.start();
 
             isRecording.set(true);
-            notifyStatus("🔴 GRABANDO - Habla ahora...", true);
+            notifyStatus("GRABANDO - Habla ahora...", true);
 
             // Hilo de grabación
             recordingThread = new Thread(this::recordAndRecognize);
@@ -184,7 +184,7 @@ public class VoskSpeechAdapter {
             microphone.close();
         }
 
-        notifyStatus("🎤 Grabación detenida", false);
+        notifyStatus("Grabacion detenida", false);
     }
 
     /**
